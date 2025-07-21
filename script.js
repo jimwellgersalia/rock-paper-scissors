@@ -1,9 +1,3 @@
-//CREATE getComputerChoice
-//inside getComputerChoice Call Math.random to generate random number between 0 - 1
-//IF value equals 0 THEN return rock
-//IF value greater than 0.5 THEN return paper
-//IF value less than 0.5 THEN return scissor
-
 function getComputerChoice() {
   let computerChoice = Math.random();
 
@@ -16,41 +10,53 @@ function getComputerChoice() {
   }
 }
 
-//CREATE getHumanChoice
-//OBTAIN the choice by prompting user.
-//return the Choice
-//use console.log() to test if its returning choice
-
 function getHumanChoice() {
   let humanChoice = prompt("Enter your choice").toLowerCase();
   return humanChoice;
 }
 
-humanScore = 0;
-computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
+const computerSelection = getComputerChoice();
+const humanSelection = getHumanChoice();
 
-//Tracking score
-//INIT humanScore equals to 0
-//INIT computerScore eqauls to 0
+function playRound(computerSelection, humanSelection) {
+  if (computerSelection == "paper") {
+    if (humanSelection == "paper") {
+      console.log("Draw, both picks Paper!");
+    } else if (humanSelection == "rock") {
+      computerScore += 1;
+      console.log("You lose, Paper beats rock");
+    } else {
+      humanScore += 1;
+      console.log("You win, Scissors beats Paper");
+    }
+  } else if (computerSelection == "rock") {
+    if (humanSelection == "paper") {
+      humanScore += 1;
+      console.log("You win, Paper beats Rock!");
+    } else if (humanSelection == "rock") {
+      console.log("Draw, both picks Rock");
+    } else {
+      computerScore += 1;
+      console.log("You lose, Rock beats Scissors");
+    }
+  } else if (computerSelection == "scissors") {
+    if (humanSelection == "paper") {
+      computerScore += 1;
+      console.log("You lose, Scissors beats Paper");
+    } else if (humanSelection == "rock") {
+      humanScore += 1;
+      console.log("You win, Rock beats Scissors");
+    } else {
+      console.log("Draw, both picks Scissors");
+    }
+  }
+  console.log();
+}
 
-//Playing Single Round
-//CREATE playRound
-//ASSIGN the getComputerChoice and getHumanChoice to a variable for the parameter
-//Human Choice must be converted to lowercase incase the user typed different cases
-//IF compChoice is paper THEN create another condition inside
-//IF humanChoice equals Rock THEN
-//DISPLAY you lose Paper beats Rock
-//ADD + 1 to computerScore
-//IF humanChoice equals Paper THEN
-//DISPLAY Draw both pick paper
-//IF humanChoice equals to Scissor THEN
-//DISPLAY you Win Scissor beats paper
-
-// getHumanChoice();
-
-console.log(getComputerChoice());
-console.log(getHumanChoice());
-
-//Repeat the Conditions on Rock and Scissor
-
-// CREATE a New Function
+playRound(computerSelection, humanSelection);
+console.log("Computer Selection: " + computerSelection);
+console.log("Human Selection:" + humanSelection);
+console.log("Human score: " + humanScore);
+console.log("Computer score: " + computerScore);
