@@ -1,12 +1,14 @@
 function getComputerChoice() {
-  let computerChoice = Math.random();
+  let computerChoice = Math.floor(Math.random() * 3);
+  console.log(computerChoice);
+  switch (computerChoice) {
+    case 0:
+      return "rock";
+    case 1:
+      return "paper";
 
-  if (computerChoice < 0.33) {
-    return "paper";
-  } else if (computerChoice > 0.66) {
-    return "scissors";
-  } else {
-    return "rock";
+    case 2:
+      return "scissors";
   }
 }
 
@@ -64,7 +66,7 @@ function playGame() {
   for (x = 0; x < 5; x++) {
     const computerSelection = getComputerChoice();
     const humanSelection = getHumanChoice();
-    playRound(computerSelection, humanSelection);
+    playRound(humanSelection, computerSelection);
 
     console.log("Human score: " + humanScore);
     console.log("Computer score: " + computerScore);
