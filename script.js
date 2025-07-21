@@ -23,17 +23,16 @@ function getHumanChoice() {
 
 //Need to prompt five times for the user to enter.
 
+// We need to call choices again for a fresh picks
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
-  const computerSelection = getComputerChoice();
-  const humanSelection = getHumanChoice();
 
   function playRound(humanChoice, computerChoice) {
-    if (humanChoice == "paper") {
-      if (computerChoice == "paper") {
-        console.log("Draw, both picks Paper!");
-      } else if (computerChoice == "rock") {
+    if (humanChoice == computerChoice) {
+      console.log("Draw, both player picks " + humanChoice);
+    } else if (humanChoice == "paper") {
+      if (computerChoice == "rock") {
         humanScore += 1;
         console.log("You Win, Paper beats rock");
       } else {
@@ -44,8 +43,6 @@ function playGame() {
       if (computerChoice == "paper") {
         computerScore += 1;
         console.log("You lose, Paper beats Rock!");
-      } else if (computerChoice == "rock") {
-        console.log("Draw, both picks Rock");
       } else {
         humanScore += 1;
         console.log("You Win, Rock beats Scissors");
@@ -57,8 +54,6 @@ function playGame() {
       } else if (computerChoice == "rock") {
         computerScore += 1;
         console.log("You Lose, Rock beats Scissors");
-      } else {
-        console.log("Draw, both picks Scissors");
       }
     }
 
@@ -66,14 +61,22 @@ function playGame() {
     console.log("Computer Selection:" + computerChoice);
   }
 
-  //   for (i = 0; i < 4; i++) {
-  playRound(humanSelection, computerSelection);
-  // getComputerChoice();
-  // getHumanChoice();
-  //   }
+  for (x = 0; x < 5; x++) {
+    const computerSelection = getComputerChoice();
+    const humanSelection = getHumanChoice();
+    playRound(computerSelection, humanSelection);
 
-  console.log("Human score: " + humanScore);
-  console.log("Computer score: " + computerScore);
+    console.log("Human score: " + humanScore);
+    console.log("Computer score: " + computerScore);
+  }
+
+  if (humanScore == computerScore) {
+    console.log("Draw, Play another game");
+  } else if (humanScore > computerScore) {
+    console.log("Congratulations! You win!");
+  } else {
+    console.log("You Lose! Better luck next time.");
+  }
 }
 
 playGame();
